@@ -1,172 +1,202 @@
-import { useState } from "react";
-import { ExternalLink } from "lucide-react";
+
+import {
+    ArrowUpRight,
+    ExternalLink,
+    GitFork,
+    FolderCode,
+} from "lucide-react";
+import BackgroundEffect from "../animation/BackgroundEffect";
 
 const projects = [
-  {
-    title: "SwiftSats",
-    category: "FINTECH / WEB3",
-    description:
-      "A crypto-purchase and Naira-settlement experience. The product flow guides users through choosing an asset and amount, reviewing payment instructions, and following transaction status in a responsive interface.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Tailwind CSS"],
-    metrics: [
-      { label: "FRONTEND", value: "React" },
-      { label: "API", value: "Node.js · Express" },
-      { label: "DATABASE", value: "MongoDB" }
-    ],
-    liveUrl: "https://swiftsat.app",
-  },
-  {
-    title: "Axiom Wallets",
-    category: "FINTECH / WEB3",
-    description:
-      "A digital-wallet and trading application experience focused on account access, wallet activity, market information, and deposit and withdrawal flows, brought together in a responsive full-stack interface.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Bootstrap"],
-    metrics: [
-      { label: "FRONTEND", value: "React" },
-      { label: "API", value: "Node.js · Express" },
-      { label: "DATABASE", value: "MongoDB" }
-    ],
-    liveUrl: "https://axiom.app",
-  },
-  {
-    title: "9jaCash",
-    category: "FINTECH / PRODUCTION",
-    description:
-      "A fintech application focused on clear transaction and account-management workflows. The experience brings responsive screens, structured data views, and practical admin tools together.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Git"],
-    metrics: [
-      { label: "FRONTEND", value: "React" },
-      { label: "API", value: "Node.js · Express" },
-      { label: "DATABASE", value: "MongoDB" }
-    ],
-    liveUrl: "https://9jacash.app",
-  }
+    {
+        title: "E-commerce",
+        status: "Live",
+        description:
+            "A product-focused shopping interface showcasing responsive layouts, reusable UI elements, and clean product presentation.",
+        image: "/pictures/E-commerce.png",
+        imageAlt: "E-commerce product card project preview",
+        technologies: ["HTML", "Tailwind CSS", "JavaScript"],
+        demo: "https://product-card-eight.vercel.app/",
+        github: "https://github.com/Olaide-FT/Product_Card",
+        featured: true,
+    },
+    {
+        title: "Music Player",
+        status: "Interactive",
+        description:
+            "A responsive music player with intuitive playback controls and a polished interface built for an engaging listening experience.",
+        image: "/pictures/Music Player.png",
+        imageAlt: "Music player project preview",
+        technologies: ["HTML", "Tailwind CSS", "JavaScript"],
+        demo: "https://code-alpha-musicplayer-mu.vercel.app/",
+        github: "https://github.com/Olaide-FT/CodeAlpha_Musicplayer",
+        featured: false,
+    },
+    {
+        title: "DishShare",
+        status: "Personal Project",
+        description:
+            "A recipe discovery experience that helps users explore recipes through an accessible, user-friendly interface.",
+        image: "/pictures/Recipe Sharing.png",
+        imageAlt: "DishShare recipe sharing project preview",
+        technologies: ["HTML", "Tailwind CSS", "JavaScript"],
+        demo: "https://dish-share-p42u.vercel.app/",
+        github: "https://github.com/Olaide-FT/Dish_Share",
+        featured: false,
+    },
 ];
 
-const categories = [
-  "All",
-  ...new Set(projects.map((project) => project.category)),
-];
-
-export default function SelectedWorks() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
-
-  return (
-    <section id="projects" className="relative isolate overflow-hidden bg-black py-24">
-      {/* Background Grid Pattern */}
-      <div 
-        aria-hidden="true" 
-        className="pointer-events-none absolute inset-0 -z-10 opacity-50" 
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-        }} 
-      />
-
-      <div className="mx-auto w-[calc(100%-2rem)] max-w-[1000px] text-center sm:w-[calc(100%-2.5rem)]">
-        <h2 className="font-display text-4xl font-bold tracking-tight text-white sm:text-6xl">
-          Selected Works
-        </h2>
-        
-        {/* Filter Pills */}
-        <div className="mt-8 grid grid-cols-3 ">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                aria-pressed={isActive}
-                onClick={() => setActiveCategory(cat)}
-                className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
-                  isActive
-                    ? "bg-white text-black shadow-lg shadow-white/10"
-                    : "border border-white/10 bg-white/[0.04] text-zinc-400 hover:border-white/20 hover:text-white"
-                }`}
-              >
-                <span>{cat}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Projects Grid */}
-      <div className="mx-auto mt-16 grid w-[calc(100%-2rem)] max-w-[1000px] grid-cols-1 gap-6 sm:w-[calc(100%-2.5rem)] lg:grid-cols-2">
-        {filteredProjects.map((project) => (
-          <article 
-            key={project.title}
-            className="relative flex flex-col justify-between rounded-[28px] border border-white/15 bg-[#0a0a0d]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8"
-          >
-            <div>
-              {/* Window Controls / Category Header */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div className="flex items-center gap-2" aria-hidden="true">
-                  <span className="size-2.5 rounded-full bg-red-500/80" />
-                  <span className="size-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="size-2.5 rounded-full bg-green-500/80" />
+function ProjectCard({ project, index }) {
+    return (
+        <article className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-card shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_24px_70px_rgba(15,23,42,0.14)] sm:rounded-[28px]">
+            {/* Project image */}
+            <div className="relative overflow-hidden border-b border-border bg-subtle">
+                <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full border border-border bg-card/90 px-3 py-1.5 backdrop-blur-md">
+                    <span className="size-1.5 rounded-full bg-accent" />
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground">
+                        {project.status}
+                    </span>
                 </div>
-                <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-zinc-400">
-                  {project.category}
+
+                <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    loading="lazy"
+                    className="h-52 w-full object-cover transition duration-700 group-hover:scale-[1.03] sm:h-56"
+                />
+
+                <span className="absolute bottom-3 right-3 grid size-10 place-items-center rounded-full border border-border bg-card/90 text-accent opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100">
+                    <ArrowUpRight size={19} />
                 </span>
-              </div>
+            </div>
 
-              {/* Title & Description */}
-              <div className="mt-6">
-                <h3 className="font-display text-2xl font-bold tracking-tight text-white">
-                  {project.title}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-zinc-400">
-                  {project.description}
+            {/* Project details */}
+            <div className="flex flex-1 flex-col p-5 sm:p-7">
+                <div className="flex items-start justify-between gap-3">
+                    <div>
+                        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                            PROJECT 0{index + 1}
+                        </p>
+
+                        <h3 className="mt-2 font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
+                            {project.title}
+                        </h3>
+                    </div>
+
+                    <FolderCode
+                        size={20}
+                        className="mt-1 shrink-0 text-muted transition-colors group-hover:text-accent"
+                    />
+                </div>
+
+                <p className="mt-4 flex-1 text-sm leading-7 text-muted">
+                    {project.description}
                 </p>
-              </div>
 
-              {/* Tags */}
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span 
-                    key={tag}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                {/* Technology badges */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {project.technologies.map((technology) => (
+                        <span
+                            key={technology}
+                            className="rounded-full border border-border bg-subtle px-3 py-1.5 font-mono text-[11px] font-medium text-muted"
+                        >
+                            {technology}
+                        </span>
+                    ))}
+                </div>
+
+                {/* Project links */}
+                <div className="mt-6 flex flex-wrap gap-3  border-border pt-5">
+                    <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-bold text-accent-foreground transition hover:-translate-y-0.5 hover:brightness-105"
+                    >
+                        <ExternalLink size={16} />
+                        Live Demo
+                    </a>
+
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} source code on GitHub`}
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border bg-subtle px-4 py-3 text-sm font-semibold text-foreground transition hover:-translate-y-0.5 hover:border-accent/60 hover:text-accent"
+                    >
+                        <GitFork size={17} />
+                        <span>Code</span>
+                    </a>
+                </div>
             </div>
+        </article>
+    );
+}
 
-            <div>
-              {/* Metrics Grid */}
-              <div className="mt-8 grid grid-cols-1 gap-2 rounded-2xl border border-white/10 bg-black/60 p-3 text-center sm:grid-cols-3">
-                {project.metrics.map((metric) => (
-                  <div key={metric.label} className="flex flex-col">
-                    <span className="font-mono text-[10px] tracking-wider text-zinc-500">{metric.label}</span>
-                    <span className="mt-1 font-display text-xs font-bold text-white sm:text-sm">{metric.value}</span>
-                  </div>
-                ))}
-              </div>
+export default function ProjectsSection() {
+    return (
+        <section
+            id="projects"
+            className="relative isolate overflow-hidden  border-border bg-background/60 py-16 sm:py-20 lg:py-24"
+        >
+            <BackgroundEffect />
+            {/* Subtle grid background matching the hero */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-0 opacity-35"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px)",
+                    backgroundSize: "50px 50px",
+                }}
+            />
 
-              {/* Action Buttons */}
-              <div className="mt-6">
-                <a 
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white py-3 text-xs font-semibold text-black transition-transform hover:-translate-y-0.5"
-                >
-                  <span>{project.liveUrl.replace("https://", "")}</span>
-                  <ExternalLink size={14} className="text-orange-500" />
-                </a>
-              </div>
+            <div className="pointer-events-none absolute -right-40 top-20 z-0 size-96 rounded-full bg-accent/[0.06] blur-3xl" />
+
+            <div className="relative z-10 mx-auto w-[calc(100%-2rem)] max-w-[1000px] sm:w-[calc(100%-2.5rem)]">
+                {/* Section heading */}
+                <div className="flex flex-col gap-6 border-border pb-7 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="max-w-2xl">
+                        <p className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-accent sm:text-xs">
+                            <span className="size-1.5 rounded-full bg-accent" />
+                            Project Gallery
+                        </p>
+
+                        <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.04em] text-foreground sm:text-4xl lg:text-5xl">
+                            Selected{" "}
+                            <span className="text-accent">works.</span>
+                        </h2>
+
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-muted sm:text-base">
+                            A selection of projects where I turn ideas into useful,
+                            responsive digital experiences.
+                        </p>
+                    </div>
+
+                    <a
+                        href="https://github.com/Olaide-FT"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-border bg-subtle px-5 py-3 text-sm font-semibold text-foreground transition hover:border-accent/60 hover:text-accent"
+                    >
+                        More on GitHub
+                        <ArrowUpRight size={16} />
+                    </a>
+                </div>
+
+                {/* Project grid */}
+                <div className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2 lg:grid-cols-3">
+                    {projects.map((project, index) => (
+                        <ProjectCard
+                            key={project.title}
+                            project={project}
+                            index={index}
+                        />
+                    ))}
+                </div>
+
+
             </div>
-          </article>
-        ))}
-      </div>
-
-    </section>
-  );
+        </section>
+    );
 }

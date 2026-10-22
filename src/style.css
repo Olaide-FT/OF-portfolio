@@ -18,12 +18,15 @@
 
 
 @theme {
-  --color-background: #0b0d0c;
-  --color-surface: #151916;
-  --color-accent: #c5f467;
-  --color-foreground: #f3f5f0;
-  --color-muted: #a0a79f;
-  --color-border: #262d28;
+  --color-background: #f8f9fc;
+  --color-surface: #ffffff;
+  --color-card: #ffffff;
+  --color-subtle: #f0f2f7;
+  --color-accent: #f0645a;
+  --color-accent-foreground: #ffffff;
+  --color-foreground: #11172b;
+  --color-muted: #606a80;
+  --color-border: #e1e4ed;
 
   --font-sans: "Inter", sans-serif;
   --font-display: "Space Grotesk", sans-serif;
@@ -39,6 +42,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  color-scheme: light;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+:root[data-theme="dark"] {
+  --color-background: #070a18;
+  --color-surface: #10162b;
+  --color-card: #0d1327;
+  --color-subtle: #171d32;
+  --color-accent: #ff6b61;
+  --color-accent-foreground: #101326;
+  --color-foreground: #f4f5fa;
+  --color-muted: #a2abc0;
+  --color-border: #2a3045;
+  color-scheme: dark;
 }
 
 * {
@@ -63,7 +81,27 @@
 }
 .portfolio-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px);
   background-size: 52px 52px;
+}
+
+.theme-backdrop {
+  background:
+    radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--color-accent) 6%, transparent), transparent 65%),
+    linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-background) 75%, transparent));
+}
+
+:root[data-theme="light"] .signal-canvas {
+  opacity: 0.3;
+}
+
+:root[data-theme="light"] .portfolio-grid {
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    transition: none;
+  }
 }

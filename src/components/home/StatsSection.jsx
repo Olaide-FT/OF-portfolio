@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from "react";
+import BackgroundEffect from "../animation/BackgroundEffect";
 
 const stats = [
   {
@@ -138,37 +139,38 @@ function StatsBackground() {
 
 export default function StatsSection() {
   return (
-    <section className="relative isolate overflow-hidden bg-black py-12">
+    <section className="relative isolate overflow-hidden bg-background/60 py-12">
+      <BackgroundEffect />
       {/* Subtle grid background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+        className="pointer-events-none absolute inset-0 z-0 opacity-70"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px)",
+            "linear-gradient(color-mix(in srgb, var(--color-foreground) 6%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-foreground) 6%, transparent) 1px, transparent 1px)",
           backgroundSize: "45px 45px",
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <StatsBackground />
       </div>
 
-      <div className="relative mx-auto grid w-[calc(100%-2rem)] max-w-[1000px] grid-cols-1 gap-4 sm:w-[calc(100%-2.5rem)] sm:grid-cols-2 lg:grid-cols-4">
+      <div className="relative z-10 mx-auto grid w-[calc(100%-2rem)] max-w-[1000px] grid-cols-1 gap-4 sm:w-[calc(100%-2.5rem)] sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <article
             key={stat.title}
-            className="flex min-h-[175px] flex-col items-center justify-center rounded-[21px] border border-white/[0.15] bg-[#0a0a0d]/95 px-4 py-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.025)] transition duration-300 hover:-translate-y-1 hover:border-white/25 sm:min-h-[175px]"
+            className="flex min-h-[175px] flex-col items-center justify-center rounded-[21px] border border-border bg-card px-4 py-6 text-center shadow-[inset_0_1px_0_rgba(15,23,42,0.025)] transition duration-300 hover:-translate-y-1 hover:border-accent/30 sm:min-h-[175px]"
           >
-            <h3 className="font-display text-[clamp(1.8rem,2.6vw,2.25rem)] font-bold leading-tight tracking-[-0.045em] text-white">
+            <h3 className="font-display text-[clamp(1.8rem,2.6vw,2.25rem)] font-bold leading-tight tracking-[-0.045em] text-accent">
               {stat.value}
             </h3>
 
-            <p className="mt-2 text-sm font-bold tracking-tight text-zinc-100">
+            <p className="mt-2 text-sm font-bold tracking-tight text-foreground">
               {stat.title}
             </p>
 
-            <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+            <p className="mt-1 text-xs leading-relaxed text-muted">
               {stat.description}
             </p>
           </article>
